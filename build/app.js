@@ -5671,9 +5671,9 @@ var Web3 = require("web3");
       }
     ],
     "unlinked_binary": "0x606060405260358060106000396000f36503050000000050606060405260e060020a600035046396e4ee3d81146024575b6007565b602435600435026060908152602090f3",
-    "updated_at": 1470602891660,
+    "updated_at": 1473494835300,
     "links": {},
-    "address": "0xddceb08930b5696ac6212086b240865846ff6382"
+    "address": "0xdcc84e38ca8026ab3f6374d88cf318152bbefef5"
   }
 };
 
@@ -6161,8 +6161,8 @@ var Web3 = require("web3");
       }
     ],
     "unlinked_binary": "0x606060405260008054600160a060020a0319163317905560f7806100236000396000f3606060405260e060020a60003504630900f01081146038578063445df0ac1460b05780638da5cb5b1460b8578063fdacd5761460c9575b005b60366004356000805433600160a060020a039081169116141560ac576001547ffdacd5760000000000000000000000000000000000000000000000000000000060609081526064919091528291600160a060020a0383169163fdacd5769160849160248183876161da5a03f1156002575050505b5050565b60ed60015481565b60ed600054600160a060020a031681565b603660043560005433600160a060020a039081169116141560ea5760018190555b50565b6060908152602090f3",
-    "updated_at": 1470602891649,
-    "address": "0x1f0b8fc6dba319db96f8f1ac314d4fe2bc0320f3",
+    "updated_at": 1473494835306,
+    "address": "0xa8e4bcb728a11408ec589aa7a011d3ac1221a000",
     "links": {}
   }
 };
@@ -6479,13 +6479,13 @@ var Web3 = require("web3");
 
   Contract.new = function() {
     if (this.currentProvider == null) {
-      throw new Error("register error: Please call setProvider() first before calling new().");
+      throw new Error("Register error: Please call setProvider() first before calling new().");
     }
 
     var args = Array.prototype.slice.call(arguments);
 
     if (!this.unlinked_binary) {
-      throw new Error("register error: contract binary not set. Can't deploy new instance.");
+      throw new Error("Register error: contract binary not set. Can't deploy new instance.");
     }
 
     var regex = /__[^_]+_+/g;
@@ -6504,7 +6504,7 @@ var Web3 = require("web3");
         return name != arr[index + 1];
       }).join(", ");
 
-      throw new Error("register contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of register: " + unlinked_libraries);
+      throw new Error("Register contains unresolved libraries. You must deploy and link the following libraries before you can deploy a new version of Register: " + unlinked_libraries);
     }
 
     var self = this;
@@ -6545,7 +6545,7 @@ var Web3 = require("web3");
 
   Contract.at = function(address) {
     if (address == null || typeof address != "string" || address.length != 42) {
-      throw new Error("Invalid address passed to register.at(): " + address);
+      throw new Error("Invalid address passed to Register.at(): " + address);
     }
 
     var contract_class = this.web3.eth.contract(this.abi);
@@ -6556,7 +6556,7 @@ var Web3 = require("web3");
 
   Contract.deployed = function() {
     if (!this.address) {
-      throw new Error("Cannot find deployed address: register not deployed or address not set.");
+      throw new Error("Cannot find deployed address: Register not deployed or address not set.");
     }
 
     return this.at(this.address);
@@ -6598,6 +6598,31 @@ var Web3 = require("web3");
   "default": {
     "abi": [
       {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "name": "members",
+        "outputs": [
+          {
+            "name": "addr",
+            "type": "address"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "memberID",
+            "type": "string"
+          }
+        ],
+        "type": "function"
+      },
+      {
         "constant": false,
         "inputs": [],
         "name": "getNumMembers",
@@ -6632,6 +6657,26 @@ var Web3 = require("web3");
           {
             "name": "addr",
             "type": "address"
+          },
+          {
+            "name": "memberID",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          }
+        ],
+        "name": "addMember",
+        "outputs": [],
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "addr",
+            "type": "address"
           }
         ],
         "name": "isMember",
@@ -6644,30 +6689,14 @@ var Web3 = require("web3");
         "type": "function"
       },
       {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "addr",
-            "type": "address"
-          },
-          {
-            "name": "memberID",
-            "type": "string"
-          }
-        ],
-        "name": "addMember",
-        "outputs": [],
-        "type": "function"
-      },
-      {
         "inputs": [],
         "type": "constructor"
       }
     ],
-    "unlinked_binary": "0x606060405260006001556102e1806100176000396000f3606060405260e060020a600035046317d5430a811461003c5780633e2d45d114610051578063a230c524146100d0578063c127c24714610110575b005b60015460408051918252519081900360200190f35b6101dd60043560408051602081810183526000808352600160a060020a03851681528082528390208054845160026001831615610100026000190190921691909104601f81018490048402820184019095528481529293909183018282801561028a5780601f1061025f5761010080835404028352916020019161028a565b61024b600435600160a060020a03811660009081526020819052604081205460026001821615610100026000190190911604811461029757506001610292565b60408051602060046024803582810135601f810185900485028601850190965285855261003a9583359593946044949392909201918190840183828082843750949650505050505050806000600050600084600160a060020a031681526020019081526020016000206000509080519060200190828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061029f57805160ff19168380011785555b506102cf9291505b808211156102dd57600081556001016101c9565b60405180806020018281038252838181518152602001915080519060200190808383829060006004602084601f0104600f02600301f150905090810190601f16801561023d5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b604080519115158252519081900360200190f35b820191906000526020600020905b81548152906001019060200180831161026d57829003601f168201915b505050505090505b919050565b506000610292565b828001600101855582156101c1579182015b828111156101c15782518260005055916020019190600101906102b1565b505060018054810190555050565b509056",
-    "updated_at": 1470607759253,
+    "unlinked_binary": "0x6060604052600060015561052e806100176000396000f3606060405260e060020a600035046308ae4b0c811461004757806317d5430a146100725780633e2d45d11461008757806376c1954614610109578063a230c52414610254575b005b61028460043560006020819052908152604090208054600160a060020a031690600181019060020183565b60015460408051918252519081900360200190f35b61039860043560408051602081810183526000808352600160a060020a038516815280825283519084902060029081018054600181161561010002600019011691909104601f810184900484028301840190955284825292939092918301828280156104455780601f1061041a57610100808354040283529160200191610445565b60408051602060248035600481810135601f81018590048502860185019096528585526100459581359591946044949293909201918190840183828082843750506040805160209735808a0135601f81018a90048a0283018a019093528282529698976064979196506024919091019450909250829150840183828082843750949650505050505050604080516060810182528481526020818101848152828401869052600160a060020a03871660009081528083529384208351815473ffffffffffffffffffffffffffffffffffffffff1916178155905180516001838101805481895297869020969794969095600260001993871615610100029390930190951691909104601f90810185900482019492939192919091019083901061045257805160ff19168380011785555b506104829291505b808211156104e15760008155600101610240565b600160a060020a03600435818116600090815260208190526040812054610406931681146105265750600161044d565b60408051600160a060020a038516815260606020820181815285546002600182161561010002600019019091160491830182905291928301906080840190869080156103115780601f106102e657610100808354040283529160200191610311565b820191906000526020600020905b8154815290600101906020018083116102f457829003601f168201915b5050838103825284546002600182161561010002600019019091160480825260209190910190859080156103865780601f1061035b57610100808354040283529160200191610386565b820191906000526020600020905b81548152906001019060200180831161036957829003601f168201915b50509550505050505060405180910390f35b60405180806020018281038252838181518152602001915080519060200190808383829060006004602084601f0104600f02600301f150905090810190601f1680156103f85780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b604080519115158252519081900360200190f35b820191906000526020600020905b81548152906001019060200180831161042857829003601f168201915b505050505090505b919050565b82800160010185558215610238579182015b82811115610238578251826000505591602001919060010190610464565b50506040820151816002016000509080519060200190828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106104e557805160ff19168380011785555b50610515929150610240565b5090565b828001600101855582156104d5579182015b828111156104d55782518260005055916020019190600101906104f7565b505060018054810190555050505050565b50600061044d56",
+    "updated_at": 1473494835312,
     "links": {},
-    "address": "0x51fe071ce037731da3075dc32adbbc3a109ee3f1"
+    "address": "0x545639a62b493d3e160288f1bb631887f604b364"
   }
 };
 
@@ -6733,7 +6762,7 @@ var Web3 = require("web3");
     Contract.links[name] = address;
   };
 
-  Contract.contract_name   = Contract.prototype.contract_name   = "register";
+  Contract.contract_name   = Contract.prototype.contract_name   = "Register";
   Contract.generated_with  = Contract.prototype.generated_with  = "3.1.2";
 
   var properties = {
@@ -6770,7 +6799,7 @@ var Web3 = require("web3");
   } else {
     // There will only be one version of this contract in the browser,
     // and we can use that.
-    window.register = Contract;
+    window.Register = Contract;
   }
 })();
 
@@ -22778,7 +22807,7 @@ module.exports = transfer;
 module.exports = {
   "ConvertLib": require("/Users/jk/healthDapp/build/contracts/ConvertLib.sol.js"),
   "Migrations": require("/Users/jk/healthDapp/build/contracts/Migrations.sol.js"),
-  "register": require("/Users/jk/healthDapp/build/contracts/register.sol.js"),
+  "Register": require("/Users/jk/healthDapp/build/contracts/register.sol.js"),
 };
 },{"/Users/jk/healthDapp/build/contracts/ConvertLib.sol.js":1,"/Users/jk/healthDapp/build/contracts/Migrations.sol.js":2,"/Users/jk/healthDapp/build/contracts/register.sol.js":3}]},{},[89])(89)
 });
@@ -22811,7 +22840,7 @@ if (typeof web3 !== 'undefined') {
 
                                                               
 
-[ConvertLib,Migrations,register].forEach(function(contract) {         
+[ConvertLib,Migrations,Register].forEach(function(contract) {         
 
   contract.setProvider(window.web3.currentProvider);          
 
@@ -22821,74 +22850,55 @@ if (typeof web3 !== 'undefined') {
 
 var accounts;
 var account;
-var balance;
 
 function setStatus(message) {
   var status = document.getElementById("status");
   status.innerHTML = message;
 };
 
-// function refreshBalance() {
-//   var meta = MetaCoin.deployed();
+function setNumMembers(message) {
+  console.log(message)
+  var numMembers = document.getElementById("numMembers");
+  numMembers.innerHTML = message;
+};
 
-//   meta.getBalance.call(account, {from: account}).then(function(value) {
-//     var balance_element = document.getElementById("balance");
-//     balance_element.innerHTML = value.valueOf();
-//   }).catch(function(e) {
-//     console.log(e);
-//     setStatus("Error getting balance; see log.");
-//   });
-// };
 
 
 function register(){
   console.log('register called')
-  var c_register = register.deployed()
+  var c_Register = Register.deployed()
 
   var memberAddress = document.getElementById("memberAddress").value;
   var memberName = document.getElementById("memberName").value;
+  var memberID = document.getElementById("memberID").value;
   console.log('registering',memberAddress,memberName)
-  c_register.addMember(memberAddress,memberName,{from:memberAddress}).then(function(){
-    console.log('retured from addMember')
-    getNumMembers()
 
-  }).catch(function(e){
-    setStatus('unable to register '+e)
+  c_Register.addMember(memberAddress,memberName,memberID,{from:memberAddress})
+    .then(function(){
+            return getNumMembers()
+          })
+
+    .catch(function(e){
+      setStatus('unable to register '+e)
   })
 
 };
 
 function getNumMembers(){
-  var c_register = register.deployed()
+  var c_Register = Register.deployed()
 
-  c_register.getNumMembers.call().then(function(res){
-    console.log(res)
-    var numMembers = document.getElementById("numMembers")
-    numMembers.innerHTML = res.valueOf();
+  c_Register.getNumMembers.call()
+    .then(function(res){
+            console.log('called getnumbers',res,res.valueOf())
+            return setNumMembers(res.valueOf())
+          })
 
-  }).catch(function(e){
+    .catch(function(e){
     console.log(e)
-    // setStatus("Error getting balance; see log.");
   })
+  return null
 };
 
-
-// function sendCoin() {
-//   var meta = MetaCoin.deployed();
-
-//   var amount = parseInt(document.getElementById("amount").value);
-//   var receiver = document.getElementById("receiver").value;
-
-//   setStatus("Initiating transaction... (please wait)");
-
-//   meta.sendCoin(receiver, amount, {from: account}).then(function() {
-//     setStatus("Transaction complete!");
-//     refreshBalance();
-//   }).catch(function(e) {
-//     console.log(e);
-//     setStatus("Error sending coin; see log.");
-//   });
-// };
 
 window.onload = function() {
   web3.eth.getAccounts(function(err, accs) {
