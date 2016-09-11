@@ -21,7 +21,6 @@ function register(){
   var memberAddress = document.getElementById("memberAddress").value;
   var memberName = document.getElementById("memberName").value;
   var memberID = document.getElementById("memberID").value;
-  console.log('registering',memberAddress,memberName)
 
   c_Register.addMember(memberAddress,memberName,memberID,{from:memberAddress})
     .then(function(){
@@ -39,7 +38,6 @@ function getNumMembers(){
 
   c_Register.getNumMembers.call()
     .then(function(res){
-            console.log('called getnumbers',res,res.valueOf())
             return setNumMembers(res.valueOf())
           })
 
