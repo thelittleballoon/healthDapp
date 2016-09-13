@@ -7,7 +7,7 @@ function setStatus(message) {
 };
 
 function setNumMembers(message) {
-  console.log(message)
+  console.log("message: "+message)
   var numMembers = document.getElementById("numMembers");
   numMembers.innerHTML = message;
 };
